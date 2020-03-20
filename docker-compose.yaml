@@ -1,0 +1,19 @@
+
+version: '3.1'
+services:
+  verdaccio:
+    build: .
+    image: verdaccio/verdaccio
+    container_name: "verdaccio-sk"
+    uplinks:
+        npmjs:
+         url: https://registry.npmjs.org/
+    environment:
+      - VERDACCIO_PORT=4873
+    ports:
+      - "4873:4873"
+    volumes:
+      - "${WEBAPP_STORAGE_HOME}/site/wwwroot/storage:/verdaccio/storage"
+      - "${WEBAPP_STORAGE_HOME}/site/wwwroot/config:/verdaccio/config"
+      - "${WEBAPP_STORAGE_HOME}/site/wwwroot/plugins:/verdaccio/plugins"
+      - "${WEBAPP_STORAGE_HOME}/site/wwwroot/logs:/verdaccio/logs"
